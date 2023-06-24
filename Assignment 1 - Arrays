@@ -1,0 +1,207 @@
+//QUESTION-1//
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+    }
+};class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        return {}; // No solution found
+    }
+};
+
+
+
+
+//QUESTION-2//
+
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int count=0;
+       
+        for(int i=0; i<nums.size(); i++){
+            
+           
+                if(nums[i] == val){
+                    count++;
+                }
+           else{
+            nums[i-count] = nums[i];
+           }
+   
+}
+ return nums.size()-count;
+    }
+    
+};
+
+
+
+
+//QUESTION-3//
+
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int low=0;
+        int high=nums.size();
+        int mid;
+        if(target>nums[high-1]){
+            return high;
+        }
+        while(low<=high){
+              mid=(low+high)/2;
+            if(nums[mid]==target){  
+                return mid;
+            }
+          
+            if(target<nums[mid]){     
+            high=mid-1;    
+            }else{
+            low=mid+1;        
+            }
+          
+        }
+         return  low;   
+    }
+};
+
+
+
+
+//QUESTION-4//
+
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& v) {
+        int n = v.size();
+        for(int i = n-1; i >= 0; i--){
+            if(i == n-1)
+                v[i]++;
+            if(v[i] == 10){
+                v[i] = 0;
+                if(i != 0){
+                    v[i-1]++;
+                }
+                else{
+                    v.push_back(0);
+                    v[i] = 1;
+                }
+            }
+        }
+        return v;
+    }
+};
+
+
+
+//QUESTION-5//
+
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i = m-1;
+        int j = n-1;
+        int k = m+n-1;
+        while(i>=0 && j>=0){
+            if(nums1[i] > nums2[j]){
+                nums1[k] = nums1[i];
+                i--; k--;
+            }
+            else{
+                nums1[k] = nums2[j];
+                j--; k--;
+            }
+        }
+        while(j>=0){
+            nums1[k] = nums2[j];
+            j--; k--;
+        }
+    }
+};
+
+
+
+//QUESTION-6//
+
+
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        for (int i = 1; i < n; i++) {
+            if (nums[i] == nums[i - 1])
+                return true;
+        }
+        return false;
+    }
+};
+
+//QUESTION-7//
+
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        if(nums.size()==1) return;
+        int l=0, r=0;
+        while(r<nums.size()){
+            if(nums[r]!=0){
+                swap(nums[l],nums[r]);
+                l++;
+                
+            }
+            r++;
+        }
+    }
+};
+
+
+//QUESTION-8//
+
+
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums);
+};
+/***************************************************************/
+vector<int> Solution::findErrorNums(vector<int>& nums) {
+    int i, size = nums.size(), dupl=0, miss=0;
+    vector<unsigned char> v(size, 0);
+    vector<int> ans;
+    for (i = 0; i < size; ++i) {
+        ++v[nums[i]-1];
+    }
+    for(i = 0; i < size; ++i) {
+        if (v[i] == 0) {
+            miss = i+1;
+        }
+        if (v[i] > 1) {
+            dupl = i+1;
+        }
+    }
+    ans.push_back(dupl);
+    ans.push_back(miss);
+    return ans;
+}
+/***************************************************************/
+
+
+
